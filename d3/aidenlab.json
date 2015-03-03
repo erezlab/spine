@@ -1,22 +1,22 @@
 {
   "nodes":[
-    {"name":"Adrian","group":1},
-    {"name":"Aviva","group":1},
+    {"name":"Adrian","group":2},
+    {"name":"Aviva","group":2},
     {"name":"Elena","group":1},
-    {"name":"Erez","group":1},
-    {"name":"Ido","group":1},
-    {"name":"Ivan","group":1},
-    {"name":"Miriam","group":1},
+    {"name":"Erez","group":2},
+    {"name":"Ido","group":2},
+    {"name":"Ivan","group":2},
+    {"name":"Miriam","group":2},
     {"name":"Muhammad","group":1},
     {"name":"Neva","group":1},
-    {"name":"Olga","group":1},
+    {"name":"Olga","group":2},
     {"name":"Pavlo","group":2},
     {"name":"Rebecca","group":2},
     {"name":"Robert","group":3},
-    {"name":"Sarah","group":2},
+    {"name":"Sarah","group":1},
     {"name":"Suhas","group":2},
-    {"name":"Valeriya","group":2},
-    {"name":"Yufei","group":3}
+    {"name":"Valeriya","group":1},
+    {"name":"Yufei","group":1}
   ],
   "links":[
     {"source":0,"target":0,"value":23},
