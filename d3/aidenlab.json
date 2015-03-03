@@ -2,21 +2,21 @@
   "nodes":[
     {"name":"Adrian","group":2},
     {"name":"Aviva","group":2},
-    {"name":"Elena","group":1},
+    {"name":"Elena","group":2},
     {"name":"Erez","group":2},
     {"name":"Ido","group":2},
     {"name":"Ivan","group":2},
     {"name":"Miriam","group":2},
-    {"name":"Muhammad","group":1},
-    {"name":"Neva","group":1},
+    {"name":"Muhammad","group":2},
+    {"name":"Neva","group":2},
     {"name":"Olga","group":2},
     {"name":"Pavlo","group":2},
     {"name":"Rebecca","group":2},
     {"name":"Robert","group":2},
-    {"name":"Sarah","group":1},
+    {"name":"Sarah","group":2},
     {"name":"Suhas","group":2},
-    {"name":"Valeriya","group":1},
-    {"name":"Yufei","group":1}
+    {"name":"Valeriya","group":2},
+    {"name":"Yufei","group":2}
   ],
   "links":[
     {"source":0,"target":0,"value":23},
