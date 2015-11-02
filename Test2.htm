@@ -51,7 +51,8 @@
 						data[response.data[i].id][response.data[j].id] = 1;
 					}
 				}else{
-					data[response.data[i].id] = {response.data[j].id: 1};
+					data[response.data[i].id] = {};
+					data[response.data[i].id][response.data[j].id] = 1;
 				}
 			}
 		}
