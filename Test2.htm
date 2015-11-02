@@ -28,5 +28,14 @@
      fjs.parentNode.insertBefore(js, fjs);
 	 
    }(document, 'script', 'facebook-jssdk'));
+   
+   // Only works after `FB.init` is called
+	function myFacebookLogin() {
+	  FB.login(function(){}, {scope: 'publish_actions'});
+	}
+
 </script>
+
+<button onclick="myFacebookLogin()">Login with Facebook</button>
+
 </body>
