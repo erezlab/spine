@@ -43,7 +43,17 @@
 	
 	function processTags(response){
 		for (i in response.data){
-			data[response.data[i].id] += 1;
+			for (j in response.data){
+				if (response.data[i].id in data){
+					if(response.data[j].id in data[response.data[i].id]){
+						data[response.data[i].id][response.data[j].id] += 1;
+					}else{
+						data[response.data[i].id][response.data[j].id] = 1;
+					}
+				}else{
+					data[response.data[i].id] = {response.data[j].id: 1};
+				}
+			}
 		}
 		
 		document.getElementById("output").innerHTML = JSON.stringify(data); 
