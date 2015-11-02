@@ -31,11 +31,11 @@
    
    // Only works after `FB.init` is called
 	function myFacebookLogin() {
-	  FB.login(function(){}, {scope: 'publish_actions'});
+	  FB.login(function(){FB.api('/me/feed', 'post', {message: 'Hello, world!'});}, {scope: 'publish_actions'});
 	}
 
+	
 </script>
 
 <button onclick="myFacebookLogin()">Login with Facebook</button>
-
 </body>
