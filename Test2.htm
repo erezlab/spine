@@ -6,7 +6,7 @@
   data-width="450"
   data-show-faces="true">
 </div>
-
+<div id="output"></div>
 
 <script>
 
@@ -42,7 +42,11 @@
 	}
 	
 	function processTags(response){
-		prompt("Output:", JSON.stringify(response));
+		for (i in response.data){
+			data[response.data[i].id] += 1;
+		}
+		
+		document.getElementById("output").innerHTML = JSON.stringify(data); 
 	}
 	
 	
