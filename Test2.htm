@@ -31,12 +31,21 @@
    
    // Only works after `FB.init` is called
 	function myFacebookLogin() {
-	  FB.login(function(){FB.api('/me/photos', 'GET', {}, process_photos);}, {scope: 'user_photos'});
+	  FB.login(function(){FB.api('/me/photos', 'GET', {}, processPhotos);}, {scope: 'user_photos'});
 	}
 
-	function process_photos(response){
+	var data = {}
+	function processPhotos(response){
+		for (i in response.data){
+			FB.api('/' + response.data[i].id + '/tags', 'GET', {}, processTags);
+		}
+	}
+	
+	function processTags(response){
 		prompt("Output:", JSON.stringify(response));
 	}
+	
+	
 	
 </script>
 
