@@ -29,15 +29,20 @@
     // Only works after `FB.init` is called
     function myFacebookLogin() {
         FB.login(function () {
+
             FB.api('/me/photos', 'GET', {}, processPhotos);
         }, {scope: 'user_photos'});
     }
 
     var data = {}
-    
+
+
     function processPhotos(response) {
         for (i in response.data) {
             FB.api('/' + response.data[i].id + '/tags', 'GET', {}, processTags);
+        }
+        if ("next" in response.paging) {
+            FB.api(response.paging.next, 'GET', {}, processTags)
         }
     }
 
