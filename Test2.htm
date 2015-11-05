@@ -35,12 +35,14 @@
     }
 
     var data = {}
-
+    var counter = 0
 
     function processPhotos(response) {
         for (i in response.data) {
             FB.api('/' + response.data[i].id + '/tags', 'GET', {}, processTags);
         }
+        console.log("proccesed page: " + counter);
+        counter++;
         if ("next" in response.paging) {
             FB.api(response.paging.next, 'GET', {}, processTags)
         }else{
