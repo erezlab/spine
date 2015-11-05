@@ -35,37 +35,38 @@
     }
 
     var data = {};
-    var counter = 0;
 
-    function processPhotos(response) {
+    function processPhotos(response) {  
         for (i in response.data) {
             FB.api('/' + response.data[i].id + '/tags', 'GET', {}, processTags);
         }
-        console.log("proccesed page: " + counter);
-        counter++;
-        console.log("next" in response.paging);
+
+        //process next page
         if ("next" in response.paging) {
-            FB.api(response.paging.next, 'GET', {}, processTags)
+            FB.api(response.paging.next, 'GET', {}, processPhotos)
         }
+
     }
 
     function processTags(response) {
         for (i in response.data) {
             for (j in response.data) {
-                if (response.data[i].id != response.data[j].id) {
-                    if (response.data[i].id in data) {
-                        if (response.data[j].id in data[response.data[i].id]) {
-                            data[response.data[i].id][response.data[j].id] += 1;
+                if (response.data[i].name != response.data[j].name) {
+                    if (response.data[i].name in data) {
+                        if (response.data[j].name in data[response.data[i].name]) {
+                            data[response.data[i].name][response.data[j].name] += 1;
                         } else {
-                            data[response.data[i].id][response.data[j].id] = 1;
+                            data[response.data[i].name][response.data[j].name] = 1;
                         }
                     } else {
-                        data[response.data[i].id] = {};
-                        data[response.data[i].id][response.data[j].id] = 1;
+                        data[response.data[i].name] = {};
+                        data[response.data[i].name][response.data[j].name] = 1;
                     }
                 }
             }
         }
+
+        document.getElementById("output").innerHTML = JSON.stringify(data);
     }
 
 
