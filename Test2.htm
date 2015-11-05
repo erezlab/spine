@@ -46,8 +46,6 @@
         console.log("next" in response.paging);
         if ("next" in response.paging) {
             FB.api(response.paging.next, 'GET', {}, processTags)
-        }else{
-            document.getElementById("output").innerHTML = JSON.stringify(data);
         }
     }
 
