@@ -43,6 +43,7 @@
         }
         console.log("proccesed page: " + counter);
         counter++;
+        console.log("next" in response.paging)
         if ("next" in response.paging) {
             FB.api(response.paging.next, 'GET', {}, processTags)
         }else{
