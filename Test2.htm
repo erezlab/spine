@@ -34,8 +34,8 @@
         }, {scope: 'user_photos'});
     }
 
-    var data = {}
-    var counter = 0
+    var data = {};
+    var counter = 0;
 
     function processPhotos(response) {
         for (i in response.data) {
@@ -43,7 +43,7 @@
         }
         console.log("proccesed page: " + counter);
         counter++;
-        console.log("next" in response.paging)
+        console.log("next" in response.paging);
         if ("next" in response.paging) {
             FB.api(response.paging.next, 'GET', {}, processTags)
         }else{
