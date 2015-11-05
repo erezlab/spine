@@ -5,57 +5,64 @@
 <script>
 
 
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '882006358580431',
-      xfbml      : true,
-      version    : 'v2.5'
-    });
-  };
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '882006358580431',
+            xfbml: true,
+            version: 'v2.5'
+        });
+    };
 
-  (function(d, s, id){
-  
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-	 
-   }(document, 'script', 'facebook-jssdk'));
-   
-   // Only works after `FB.init` is called
-	function myFacebookLogin() {
-	  FB.login(function(){FB.api('/me/photos', 'GET', {}, processPhotos);}, {scope: 'user_photos'});
-	}
+    (function (d, s, id) {
 
-	var data = {}
-	function processPhotos(response){
-		for (i in response.data){
-			FB.api('/' + response.data[i].id + '/tags', 'GET', {}, processTags);
-		}
-	}
-	
-	function processTags(response){
-		for (i in response.data){
-			for (j in response.data){
-				if (response.data[i].id in data){
-					if(response.data[j].id in data[response.data[i].id]){
-						data[response.data[i].id][response.data[j].id] += 1;
-					}else{
-						data[response.data[i].id][response.data[j].id] = 1;
-					}
-				}else{
-					data[response.data[i].id] = {};
-					data[response.data[i].id][response.data[j].id] = 1;
-				}
-			}
-		}
-		
-		document.getElementById("output").innerHTML = JSON.stringify(data); 
-	}
-	
-	
-	
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Only works after `FB.init` is called
+    function myFacebookLogin() {
+        FB.login(function () {
+            FB.api('/me/photos', 'GET', {}, processPhotos);
+        }, {scope: 'user_photos'});
+    }
+
+    var data = {}
+    
+    function processPhotos(response) {
+        for (i in response.data) {
+            FB.api('/' + response.data[i].id + '/tags', 'GET', {}, processTags);
+        }
+    }
+
+    function processTags(response) {
+        for (i in response.data) {
+            for (j in response.data) {
+                if (response.data[i].id != response.data[j].id) {
+                    if (response.data[i].id in data) {
+                        if (response.data[j].id in data[response.data[i].id]) {
+                            data[response.data[i].id][response.data[j].id] += 1;
+                        } else {
+                            data[response.data[i].id][response.data[j].id] = 1;
+                        }
+                    } else {
+                        data[response.data[i].id] = {};
+                        data[response.data[i].id][response.data[j].id] = 1;
+                    }
+                }
+            }
+        }
+
+        document.getElementById("output").innerHTML = JSON.stringify(data);
+    }
+
+
 </script>
 
 <button onclick="myFacebookLogin()">Login with Facebook</button>
