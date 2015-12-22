@@ -5,6 +5,7 @@
 
 function facebookDictionaryToMatrix(fb_dict) {
     var names = Object.keys(fb_dict);
+//    names.sort(function(a, b){return names_score[names.indexOf(b)]-names_score[names.indexOf(a)]})
     var data = [];
     for (var i = 0; i < names.length; i++) {
         data.push([]);
@@ -15,6 +16,7 @@ function facebookDictionaryToMatrix(fb_dict) {
 
     console.log(JSON.stringify(names));
     console.log(JSON.stringify(data));
+
     visualizeMatrix(data, names, "myDiv");
     return data;
 }
