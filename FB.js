@@ -28,8 +28,8 @@ window.fbAsyncInit = function () {
 
 // Only works after `FB.init` is called
 function myFacebookLogin() {
-    FB.login(function () {
-
+    FB.login(function (callbackFuction) {
+        facebokCallBackFunction = callbackFuction;
         FB.api('/me/photos', 'GET', {}, processPhotos);
     }, {scope: 'user_photos'});
 }
@@ -42,6 +42,8 @@ function processPhotos(response) {
     //process next page
     if ("next" in response.paging) {
         FB.api(response.paging.next, 'GET', {}, processPhotos)
+    }else{
+        facebokCallBackFunction();
     }
 
 }
