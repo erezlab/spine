@@ -3,7 +3,7 @@
 <textarea cols="50" rows="20" id="raw_data"></textarea>
 <br />
 <button onclick="myFacebookLogin(facebookDictionaryToMatrix)">Load and Run on FB Data</button>
-<button onclick='facebookDictionaryToMatrix(JSON.parse(document.getElementById("raw_data").value))'>Run</button>
+<button onclick='facebookDictionaryToMatrix(eval(document.getElementById("raw_data").value))'>Run</button>
 <br />
 <div id="myDiv"></div>
 <br />
@@ -13,8 +13,6 @@
 <script src="Data.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="jLouvain.js"></script>
-<script src="metinee_data.js"></script>
-
 
 
 <div id="clusterOutput"></div>
