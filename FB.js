@@ -66,5 +66,5 @@ function processTags(response) {
         }
     }
 
-    document.getElementById("output").innerHTML = JSON.stringify(data);
+    document.getElementById("raw_data").value = JSON.stringify(data);
 }

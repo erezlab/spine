@@ -1,5 +1,12 @@
 <body>
 
+<textarea cols="50" rows="20" id="raw_data"></textarea>
+<br />
+<button onclick="myFacebookLogin(facebookDictionaryToMatrix)">Load and Run on FB Data</button>
+<button onclick='facebookDictionaryToMatrix(JSON.parse(document.getElementById("raw_data").value))'>Run</button>
+<br />
+<div id="myDiv"></div>
+<br />
 <div id="output"></div>
 
 <script src="FB.js"></script>
@@ -8,14 +15,12 @@
 <script src="jLouvain.js"></script>
 <script src="metinee_data.js"></script>
 
-<div id="container" style="height: 400px; min-width: 310px; max-width: 800px; margin: 0 auto"></div>
 
-<div id="myDiv"></div>
 
 <div id="clusterOutput"></div>
 
 <!-- <button onclick="facebookDictionaryToMatrix(m_data)">Login with Facebook</button> -->
 
-<button onclick="myFacebookLogin(facebookDictionaryToMatrix)">Login with Facebook</button>
+
 
 </body>
