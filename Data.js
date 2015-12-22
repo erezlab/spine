@@ -9,9 +9,23 @@ function facebookDictionaryToMatrix(fb_dict) {
     for (var i = 0; i < names.length; i++) {
         data.push([]);
         for (var j = 0; j < names.length; j++) {
-            data[i].push(fb_dict[data[i]][data[j]]);
+            data[i].push(fb_dict[names[i]][names[j]]);
         }
     }
 
+    visualizeMatrix(data, names, "myDiv");
     return data;
+}
+
+function visualizeMatrix(matrix, labels, div_id){
+    var data = [
+        {
+            z: matrix,
+            x: labels,
+            y: labels,
+            type: 'heatmap'
+        }
+    ];
+
+    Plotly.newPlot(div_id, data);
 }

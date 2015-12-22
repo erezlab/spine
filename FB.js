@@ -27,9 +27,9 @@ window.fbAsyncInit = function () {
 }(document, 'script', 'facebook-jssdk'));
 
 // Only works after `FB.init` is called
-function myFacebookLogin() {
-    FB.login(function (callbackFuction) {
-        facebokCallBackFunction = callbackFuction;
+function myFacebookLogin(callbackFuction) {
+    facebokCallBackFunction = callbackFuction;
+    FB.login(function () {
         FB.api('/me/photos', 'GET', {}, processPhotos);
     }, {scope: 'user_photos'});
 }
@@ -43,7 +43,7 @@ function processPhotos(response) {
     if ("next" in response.paging) {
         FB.api(response.paging.next, 'GET', {}, processPhotos)
     }else{
-        facebokCallBackFunction();
+        facebokCallBackFunction(data);
     }
 
 }
@@ -51,7 +51,7 @@ function processPhotos(response) {
 function processTags(response) {
     for (i in response.data) {
         for (j in response.data) {
-            if (response.data[i].name != response.data[j].name) {
+            //if (response.data[i].name != response.data[j].name) {
                 if (response.data[i].name in data) {
                     if (response.data[j].name in data[response.data[i].name]) {
                         data[response.data[i].name][response.data[j].name] += 1;
@@ -62,7 +62,7 @@ function processTags(response) {
                     data[response.data[i].name] = {};
                     data[response.data[i].name][response.data[j].name] = 1;
                 }
-            }
+            //}
         }
     }
 
