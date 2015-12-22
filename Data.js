@@ -13,6 +13,8 @@ function facebookDictionaryToMatrix(fb_dict) {
         }
     }
 
+    console.log(JSON.stringify(names));
+    console.log(JSON.stringify(data));
     visualizeMatrix(data, names, "myDiv");
     return data;
 }
