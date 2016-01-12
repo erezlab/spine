@@ -30,7 +30,10 @@ window.fbAsyncInit = function () {
 function myFacebookLogin(callbackFuction) {
     facebokCallBackFunction = callbackFuction;
     FB.login(function () {
-        FB.api('/me/photos', 'GET', {}, processPhotos);
+        FB.api('/me', 'GET', {}, function (response) {
+            my_id = response.id;
+            FB.api('/me/photos', 'GET', {}, processPhotos);
+        });
     }, {scope: 'user_photos'});
 }
 
@@ -42,7 +45,7 @@ function processPhotos(response) {
     //process next page
     if ("next" in response.paging) {
         FB.api(response.paging.next, 'GET', {}, processPhotos)
-    }else{
+    } else {
         facebokCallBackFunction(data);
     }
 
@@ -51,6 +54,7 @@ function processPhotos(response) {
 function processTags(response) {
     for (i in response.data) {
         for (j in response.data) {
+            if (response.data[i].id != my_id && response.data[j].id != my_id) {
             //if (response.data[i].name != response.data[j].name) {
                 if (response.data[i].name in data) {
                     if (response.data[j].name in data[response.data[i].name]) {
@@ -62,7 +66,7 @@ function processTags(response) {
                     data[response.data[i].name] = {};
                     data[response.data[i].name][response.data[j].name] = 1;
                 }
-            //}
+            }
         }
     }
 

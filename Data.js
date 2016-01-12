@@ -10,7 +10,16 @@ function loginCallback(fb_dict) {
 
     //  visualizeMatrix(adj_matrix, adj_matrix_labels, "myDiv");
     var d3_object = createD3jsonObject(fb_dict, cluster_mapping);
-    runD3(d3_object);
+
+    var order_function = runD3(d3_object, "square", "lists", document.getElementById("square_row").offsetWidth);
+    order_function(document.getElementById("order").value);
+
+
+    document.body.onresize = function(){
+        console.log("resized");
+        var order_function = runD3(d3_object, "square", "lists", document.getElementById("square_row").offsetWidth);
+        order_function(document.getElementById("order").value);
+    };
 }
 
 function facebookDictionaryToMatrix(fb_dict, names) {
@@ -65,7 +74,27 @@ function computeClusters(matrix, labels) {
     return community();
 }
 
+function generateClusterLists(d3_object) {
+    var clusters = {};
+
+    //find max cluster
+    var max = 0;
+    for (var i in d3_object.nodes) {
+        if (clusters[d3_object.nodes[i].group] == null) {
+            clusters[d3_object.nodes[i].group] = "<ul><li>" + d3_object.nodes[i].name + "</li>";
+        } else {
+            clusters[d3_object.nodes[i].group] = clusters[d3_object.nodes[i].group] + "<li>" + d3_object.nodes[i].name + "</li>";
+        }
+    }
+
+    for (var key in Object.keys(clusters)) {
+        clusters[key] += "</li>";
+    }
+
+    return clusters;
+}
 function createD3jsonObject(fb_data, cluster_mapping) {
+
     var d3_obj = {"nodes": [], "links": []};
 
     var names = Object.keys(fb_data);
@@ -78,20 +107,25 @@ function createD3jsonObject(fb_data, cluster_mapping) {
             }
         }
     }
+
+    //console.log(JSON.stringify(d3_obj))
     return d3_obj;
     //document.getElementById('output').innerHTML = JSON.stringify(d3_obj);
 }
 
-function runD3(miserables) {
-    var margin = {top: 80, right: 0, bottom: 10, left: 80},
-        width = 15*201,
+function runD3(miserables, square_div_id, list_div_id, width) {
+
+    var clusters = generateClusterLists(miserables);
+
+    var margin = {top: 0, right: 0, bottom: 0, left: 0},
         height = width;
 
     var x = d3.scale.ordinal().rangeBands([0, width]),
         z = d3.scale.linear().domain([0, 4]).clamp(true),
         c = d3.scale.category10().domain(d3.range(10));
 
-    var svg = d3.select("body").append("svg")
+    //var svg = d3.select("#square");
+    var svg = d3.select("#" + square_div_id)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .style("margin-left", margin.left + "px")
@@ -155,14 +189,15 @@ function runD3(miserables) {
     row.append("line")
         .attr("x2", width);
 
-    row.append("text")
-        .attr("x", -6)
-        .attr("y", x.rangeBand() / 2)
-        .attr("dy", ".1em")
-        .attr("text-anchor", "end")
-        .text(function (d, i) {
-            return nodes[i].name;
-        });
+    //row.append("text")
+    //    .attr("x", -6)
+    //    .attr("y", x.rangeBand() / 2)
+    //    .attr("dy", ".1em")
+    //    .attr("text-anchor", "end")
+    //    .text(function (d, i) {
+    //        return "";
+    //        //return nodes[i].name;
+    //    });
 
     var column = svg.selectAll(".column")
         .data(matrix)
@@ -175,14 +210,16 @@ function runD3(miserables) {
     column.append("line")
         .attr("x1", -width);
 
-    column.append("text")
-        .attr("x", 6)
-        .attr("y", x.rangeBand() / 2)
-        .attr("dy", ".1em")
-        .attr("text-anchor", "start")
-        .text(function (d, i) {
-            return nodes[i].name;
-        });
+    //column.append("text")
+    //    .attr("x", 6)
+    //    .attr("y", x.rangeBand() / 2)
+    //    .attr("dy", ".1em")
+    //    .attr("text-anchor", "start")
+    //    .text(function (d, i) {
+    //        return "";
+    //        //return nodes[i].name;
+    //    });
+
 
     function row(row) {
         var cell = d3.select(this).selectAll(".cell")
@@ -202,21 +239,14 @@ function runD3(miserables) {
             .style("fill", function (d) {
                 return nodes[d.x].group == nodes[d.y].group ? c(nodes[d.x].group) : null;
             })
-            .on("mouseover", mouseover)
-            .on("mouseout", mouseout);
+            .on("click", mouseover);
+        //.on("mouseout", mouseout);
     }
 
     function mouseover(p) {
-        d3.selectAll(".row text").classed("active", function (d, i) {
-            return i == p.y;
-        });
-        d3.selectAll(".column text").classed("active", function (d, i) {
-            return i == p.x;
-        });
-    }
-
-    function mouseout() {
-        d3.selectAll("text").classed("active", false);
+        if (miserables.nodes[p.y].group == miserables.nodes[p.x].group) {
+            document.getElementById(list_div_id).innerHTML = clusters[miserables.nodes[p.y].group];
+        }
     }
 
     d3.select("#order").on("change", function () {
@@ -258,5 +288,6 @@ function runD3(miserables) {
         d3.select("#order").property("selectedIndex", 2).node().focus();
     }, 5000);
 
+    return order;
 }
 
