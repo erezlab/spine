@@ -114,7 +114,7 @@ function createD3jsonObject(fb_data, cluster_mapping) {
     //document.getElementById('output').innerHTML = JSON.stringify(d3_obj);
 }
 
-function runD3(miserables,clusters, square_div_id, list_div_id, width) {
+function runD3(miserables, clusters, square_div_id, list_div_id, width) {
 
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
         height = width;
@@ -244,7 +244,8 @@ function runD3(miserables,clusters, square_div_id, list_div_id, width) {
 
     function mouseover(p) {
         if (miserables.nodes[p.y].group == miserables.nodes[p.x].group) {
-            document.getElementById(list_div_id).innerHTML = clusters[miserables.nodes[p.y].group];
+            $('#collapse' + miserables.nodes[p.y].group).collapse();
+            //document.getElementById(list_div_id).innerHTML = clusters[miserables.nodes[p.y].group];
         }
     }
 
@@ -288,10 +289,14 @@ function runD3(miserables,clusters, square_div_id, list_div_id, width) {
     }, 5000);
 
     //print clusters
+    var keys = Object.keys(clusters);
+    keys.sort();
+    keys.reverse();
 
-    for(var key in Object.keys(clusters)){
+    for (var key in keys) {
         document.getElementById('lists').innerHTML = document.getElementById('lists').innerHTML +
-        '<div class="panel panel-default" id="panel'+key+'"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-target="#collapse'+key+'" href="#collapse'+key+'">Cluster #'+key+'</a></h4></div><div id="collapseOne" class="panel-collapse collapse in"><div class="panel-body">'+clusters[key]+'</div></div></div>';
+            '<div class="panel panel-default" id="panel'+key+'"> <div class="panel-heading"> <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapse'+key+'" href="#collapse'+key+'"> Cluster #'+key+' </a> </h4> </div> <div id="collapse'+key+'" class="panel-collapse collapse in"> <div class="panel-body">'+clusters[key]+'</div> </div> </div>';
+        $('.collapse').collapse()
     }
 
     return order;
