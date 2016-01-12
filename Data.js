@@ -11,15 +11,16 @@ function loginCallback(fb_dict) {
     //  visualizeMatrix(adj_matrix, adj_matrix_labels, "myDiv");
     var d3_object = createD3jsonObject(fb_dict, cluster_mapping);
 
-    var order_function = runD3(d3_object, "square", "lists", document.getElementById("square_row").offsetWidth);
+    var clusters = generateClusterLists(d3_object);
+
+    var order_function = runD3(d3_object, clusters, "square", "lists", document.getElementById("square_row").offsetWidth);
     order_function(document.getElementById("order").value);
 
-
-    document.body.onresize = function(){
-        console.log("resized");
-        var order_function = runD3(d3_object, "square", "lists", document.getElementById("square_row").offsetWidth);
-        order_function(document.getElementById("order").value);
-    };
+    //document.body.onresize = function(){
+    //    console.log("resized");
+    //    var order_function = runD3(d3_object, "square", "lists", document.getElementById("square_row").offsetWidth);
+    //    order_function(document.getElementById("order").value);
+    //};
 }
 
 function facebookDictionaryToMatrix(fb_dict, names) {
@@ -113,9 +114,7 @@ function createD3jsonObject(fb_data, cluster_mapping) {
     //document.getElementById('output').innerHTML = JSON.stringify(d3_obj);
 }
 
-function runD3(miserables, square_div_id, list_div_id, width) {
-
-    var clusters = generateClusterLists(miserables);
+function runD3(miserables,clusters, square_div_id, list_div_id, width) {
 
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
         height = width;
@@ -287,6 +286,13 @@ function runD3(miserables, square_div_id, list_div_id, width) {
         order("group");
         d3.select("#order").property("selectedIndex", 2).node().focus();
     }, 5000);
+
+    //print clusters
+
+    for(var key in Object.keys(clusters)){
+        document.getElementById('lists').innerHTML = document.getElementById('lists').innerHTML +
+        '<div class="panel panel-default" id="panel'+key+'"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-target="#collapse'+key+'" href="#collapse'+key+'">Cluster #'+key+'</a></h4></div><div id="collapseOne" class="panel-collapse collapse in"><div class="panel-body">'+clusters[key]+'</div></div></div>';
+    }
 
     return order;
 }
