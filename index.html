@@ -159,7 +159,8 @@
         <div class="col-lg-8 col-lg-offset-2">
             <h2 id="detail_view_header" >Share for Science</h2>
 
-            <form role="form">
+            <form role="form" target="data_collector.php">
+                <input id="anon_id" type="hidden">
                 <div class="form-group">
                     <label for="birthday">Birthday:</label>
                     <input type="date" class="form-control" id="birthday">
@@ -201,11 +202,13 @@
 <!-- Custom Theme JavaScript -->
 <script src="js/grayscale.js"></script>
 
+<script src="hash.js"></script>
 
 <script src="FB.js"></script>
 <script src="Data.js"></script>
 <script src="jLouvain.js"></script>
 <script src="http://d3js.org/d3.v2.min.js?2.8.1"></script>
+
 
 </body>
 

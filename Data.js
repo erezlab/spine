@@ -31,19 +31,9 @@ function loginCallback(fb_dict) {
             }
         }
     }
-    document.getElementById('anon_data').value = JSON.stringify(anon_data)
+    document.getElementById('anon_data').value = JSON.stringify(anon_data);
     document.getElementById('friend_count').disabled = true;
-
-    //document.getElementById("raw_data").style.display = '';
-
-    //document.getElementById("raw_data").value = JSON.stringify(adj_matrix);
-
-
-    //document.body.onresize = function(){
-    //    console.log("resized");
-    //    var order_function = runD3(d3_object, "square", "lists", document.getElementById("square_row").offsetWidth);
-    //    order_function(document.getElementById("order").value);
-    //};
+    document.getElementById('anon_id').value = Sha1.hash(my_id);
 }
 
 function facebookDictionaryToMatrix(fb_dict, names) {
