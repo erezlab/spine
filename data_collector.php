@@ -20,8 +20,6 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
-?>
-
 $anon_id = '1ae43e516b48d388004b8a9e0393ee4820dcf062';
 $name = 'Napas Udomsak';
 $friend_count = 646;
@@ -38,4 +36,5 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 
+?>
 </body>
