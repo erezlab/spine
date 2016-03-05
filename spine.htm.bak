@@ -1,0 +1,29 @@
+<body>
+
+<textarea cols="50" rows="20" id="raw_data"></textarea>
+<br />
+<button onclick="myFacebookLogin(loginCallback)">Load and Run on FB Data</button>
+<button onclick='facebookDictionaryToMatrix(eval(document.getElementById("raw_data").value))'>Run</button>
+<br />
+<div id="myDiv"></div>
+<br />
+<div id="output"></div>
+<br />
+<div id="cluster_color_output"></div>
+<br />
+<div id="reordered_output"></div>
+<br />
+<div id="clusterOutput"></div>
+
+<script src="FB.js"></script>
+<script src="Data.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="jLouvain.js"></script>
+
+
+
+<!-- <button onclick="facebookDictionaryToMatrix(m_data)">Login with Facebook</button> -->
+
+
+
+</body>
