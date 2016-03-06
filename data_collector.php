@@ -20,6 +20,8 @@ $birthday = $_POST["birthday"];
 $friend_count = $_POST["friend_count"];
 $spine_count = $_POST["spine_count"];
 $data = $_POST["anon_data"];
+echo $friend_count;
+echo $spine_count;
 
 $sql = "INSERT INTO people (anon_id, friend_count, spine_count, birthday, data)"
 ." VALUES ('"
