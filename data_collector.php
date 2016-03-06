@@ -21,10 +21,10 @@ $friend_count = $_POST["friend_count"];
 $spine_count = $_POST["spine_count"];
 $data = $_POST["anon_data"];
 
-/*
+
 echo "FRIEND COUNT:".$friend_count;
 echo "SPINE COUNT:".$spine_count;
-
+/*
 $sql = "INSERT INTO people (anon_id, friend_count, spine_count, birthday, data)"
 ." VALUES ('"
 .$anon_id
