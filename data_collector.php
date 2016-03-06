@@ -33,7 +33,7 @@ $sql = "INSERT INTO people (anon_id, friend_count, spine_count, birthday, data)"
 ."')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Thanks for Sharing";
+    echo "Thanks for sharing!";
 } else {
     echo "Your data has already been recorded";
 }
