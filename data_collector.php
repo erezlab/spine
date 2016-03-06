@@ -21,6 +21,7 @@ $friend_count = $_POST["friend_count"];
 $spine_count = $_POST["spine_count"];
 $data = $_POST["anon_data"];
 
+/*
 echo "FRIEND COUNT:".$friend_count;
 echo "SPINE COUNT:".$spine_count;
 
@@ -44,6 +45,6 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
-
+*/
 ?>
 </body>
