@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 echo "Connected successfully";
-
+/*HELLLO */
 $anon_id = $_POST["anon_id"];
 $birthday = $_POST["birthday"];
 $friend_count = $_POST["friend_count"];
