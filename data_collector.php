@@ -1,5 +1,4 @@
 <body>
-	HELLO PHP
 <?php
 $servername = "localhost";
 $username = "root";
@@ -13,8 +12,7 @@ $conn = new mysqli($servername, $username, $password,$db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
-/*HELLLO */
+
 $anon_id = $_POST["anon_id"];
 $birthday = $_POST["birthday"];
 $friend_count = $_POST["friend_count"];
@@ -35,9 +33,9 @@ $sql = "INSERT INTO people (anon_id, friend_count, spine_count, birthday, data)"
 ."')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "Thanks for Sharing";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Your data has already been recorded";
 }
 
 $conn->close();
