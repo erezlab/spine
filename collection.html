@@ -1,45 +1,3 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "marie_napas";
-$db = "spine";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password,$db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$anon_id = $_POST["anon_id"];
-$birthday = $_POST["birthday"];
-$friend_count = $_POST["friend_count"];
-$spine_count = $_POST["spine_count"];
-$data = $_POST["anon_data"];
-
-$sql = "INSERT INTO people (anon_id, friend_count, spine_count, birthday, data)"
-." VALUES ('"
-.$anon_id
-."', "
-.$friend_count
-.", "
-.$spine_count
-.", '"
-.$birthday
-."', '"
-.$data
-."')";
-
-if ($conn->query($sql) === TRUE) {
-    $sucess = "Thanks for sharing!";
-} else {
-    $sucess = "Your data has already been recorded";
-}
-
-$conn->close();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,7 +76,7 @@ $conn->close();
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h1 class="brand-heading">SPINE</h1>
-                    <p class="intro-text"><?php echo $sucess ?></p>
+                    <p class="intro-text">Spatial Proximity in Images for Network Exploration</p>
                 </div>
             </div>
         </div>
@@ -152,4 +110,3 @@ $conn->close();
 </body>
 
 </html>
-
