@@ -36,6 +36,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Thanks for sharing!";
 } else {
     echo "Your data has already been recorded";
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
