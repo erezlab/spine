@@ -32,7 +32,7 @@ function loginCallback(fb_dict) {
         }
     }
     document.getElementById('anon_data').value = JSON.stringify(anon_data);
-    document.getElementById('anon_data').disabled = true;
+    //document.getElementById('anon_data').disabled = true;
     document.getElementById('spine_count').value = adj_matrix_labels.length;
 }
 

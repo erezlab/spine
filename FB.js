@@ -37,9 +37,9 @@ function myFacebookLogin(callbackFuction) {
             birthday = response.birthday;
             friend_count = response.context.mutual_friends.summary.total_count;
             document.getElementById('birthday').value = birthday.slice(6, 10) + "-" + birthday.slice(0, 2) + "-" + birthday.slice(3, 5);
-            document.getElementById('birthday').disabled = true;
+            //document.getElementById('birthday').disabled = true;
             document.getElementById('friend_count').value = friend_count;
-            document.getElementById('friend_count').disabled = true;
+            //document.getElementById('friend_count').disabled = true;
             document.getElementById('anon_id').value = Sha1.hash(my_id);
 
             FB.api('/me/photos', 'GET', {}, processPhotos);
