@@ -34,7 +34,7 @@ $sql = "INSERT INTO people (anon_id, friend_count, spine_count, birthday, data)"
 if ($conn->query($sql) === TRUE) {
     $sucess = "Thanks for sharing!";
 } else {
-    $sucess = "Your data has already been recorded";
+    $sucess = "Thanks for sharing!";
 }
 
 $conn->close();
@@ -44,6 +44,7 @@ $conn->close();
 <html lang="en">
 
 <head>
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
